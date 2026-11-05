@@ -307,17 +307,19 @@ def _learn_page(user_id: int, book: str) -> str:
     if word is None:
         body = "<p>Незнакомых слов не осталось.</p>"
     else:
+        senses = definitions(word, language_of(book))
+        bases = []
         glosses = []
-        for pos, base, meaning in definitions(word, language_of(book)):
-            label = pos
-            if base and base != word:
-                label = f"{pos}, {base}" if pos else base
-            glosses.append(f"{label}: {meaning}" if label else meaning)
+        for pos, base, meaning in senses:
+            if base and base not in bases:
+                bases.append(base)
+            glosses.append(f"{pos}: {meaning}" if pos else meaning)
         body = (
             f"<p class='word'>{_esc(word)}</p>"
             f"<p>{index + 1} из {total}</p>"
-            + _items("Примеры", sentences_of(book, word), "Примеров нет.", word)
+            + _items("Начальная форма", bases, "Начальной формы пока нет.")
             + _items("Определения", glosses, "Определения пока нет.")
+            + _items("Примеры", sentences_of(book, word), "Примеров нет.", word)
             + f"<form id='prev' class='line' method='post' action='/books/{_esc(book)}/prev'>"
             "<button>← Назад</button></form> "
             f"<form id='next' class='line' method='post' action='/books/{_esc(book)}/next'>"
