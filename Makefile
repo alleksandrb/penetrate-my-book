@@ -3,13 +3,14 @@ TABLE ?= murik-en
 LANG ?= en
 DB := storage/knowledge.db
 
-.PHONY: help parse synk csv ui db
+.PHONY: help parse synk csv ui desktop db
 
 help:
 	@echo "make parse FILE=$(FILE) LANG=$(LANG)"
 	@echo "make synk TABLE=$(TABLE)"
 	@echo "make csv TABLE=$(TABLE)"
 	@echo "make ui"
+	@echo "make desktop"
 	@echo "make db"
 
 parse:
@@ -23,6 +24,9 @@ csv:
 
 ui:
 	python -u main.py --ui
+
+desktop:
+	python -u main.py --desktop
 
 db:
 	python -m sqlite3 $(DB)

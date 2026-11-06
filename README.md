@@ -22,6 +22,22 @@ make ui
 
 Позиция в уроке держится, пока работает `make ui`. После перезапуска урок снова начинается с самого частого неизвестного слова. Отмеченные слова при этом остаются.
 
+## Окно
+
+```bash
+make desktop
+```
+
+Те же экраны и те же правила, что на сайте. База общая: `storage/knowledge.db`. Стрелки влево и вправо листают слово, Escape возвращает к списку книг. Окно — это Tk из стандартной библиотеки, отдельные пакеты не ставятся. Закрытие окна останавливает программу.
+
+Tk есть в обычном Python на Windows, macOS и Linux. Сборка Homebrew его не включает, пока не поставлен Tk для той же версии Python:
+
+```bash
+brew install python-tk@3.14
+```
+
+На Linux пакет называется `python3-tk`. В установщике с python.org для Windows Tk уже есть.
+
 ## Команды
 
 `make` без цели печатает справку.
@@ -31,6 +47,7 @@ make parse FILE=murik.txt LANG=en
 make parse FILE=buch.txt LANG=de
 make synk TABLE=murik-en
 make csv TABLE=murik-en
+make desktop
 make db
 ```
 
@@ -51,5 +68,6 @@ python main.py --parse murik.txt en
 python main.py --synk murik-en
 python main.py --create-csv murik-en
 python main.py --ui
+python main.py --desktop
 ```
 

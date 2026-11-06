@@ -1,0 +1,6 @@
+# Bytecode the interpreter writes next to the sources.
+__pycache__/
+*.py[cod]
+*$py.class
+
+# storage/ stays tracked for now.

@@ -41,12 +41,18 @@ def main() -> None:
     if command == "--ui" and len(sys.argv) == 2:
         serve()
         return
+    if command == "--desktop" and len(sys.argv) == 2:
+        from src.desktop import run
+
+        run()
+        return
     sys.exit(
         "Usage:\n"
         f"  python {Path(__file__).name} --parse <file.txt> [language]\n"
         f"  python {Path(__file__).name} --synk <table>\n"
         f"  python {Path(__file__).name} --create-csv <table>\n"
-        f"  python {Path(__file__).name} --ui"
+        f"  python {Path(__file__).name} --ui\n"
+        f"  python {Path(__file__).name} --desktop"
     )
 
 
