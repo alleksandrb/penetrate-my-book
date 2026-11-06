@@ -3,7 +3,6 @@ from pathlib import Path
 
 from src.books import BookDecodeError, add_book, sync_book
 from src.report import create_csv
-from src.web import serve
 
 
 def _report_sync(name: str) -> None:
@@ -38,9 +37,6 @@ def main() -> None:
     if command == "--create-csv" and len(sys.argv) == 3:
         print(create_csv(sys.argv[2]))
         return
-    if command == "--ui" and len(sys.argv) == 2:
-        serve()
-        return
     if command == "--desktop" and len(sys.argv) == 2:
         from src.desktop import run
 
@@ -51,7 +47,6 @@ def main() -> None:
         f"  python {Path(__file__).name} --parse <file.txt> [language]\n"
         f"  python {Path(__file__).name} --synk <table>\n"
         f"  python {Path(__file__).name} --create-csv <table>\n"
-        f"  python {Path(__file__).name} --ui\n"
         f"  python {Path(__file__).name} --desktop"
     )
 
